@@ -104,5 +104,46 @@ public class EventsDao {
 		return archi;
 	}
 	
+	public List<String> reati(){
+		String sql="SELECT DISTINCT d.offense_category_id AS cat "
+				+ "FROM events d";
+		List<String>result = new ArrayList<>();
+		Connection conn = DBConnect.getConnection();
+		try {
+			PreparedStatement st = conn.prepareStatement(sql) ;
+            ResultSet res = st.executeQuery();
+			
+			while(res.next()){
+				result.add(res.getString("cat"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null ;
+		}
+		return result;
+	}
+	
+	public List<Integer> mesi(){
+		String sql="SELECT DISTINCT MONTH(d.reported_date) AS mese "
+				+ "FROM events  d "
+				+ "ORDER BY mese";
+		List<Integer>result = new ArrayList<>();
+		Connection conn = DBConnect.getConnection();
+		try {
+			PreparedStatement st = conn.prepareStatement(sql) ;
+            ResultSet res = st.executeQuery();
+			
+			while(res.next()){
+				result.add(res.getInt("mese"));
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			return null ;
+		}
+		return result;
+	}
+	
 
 }

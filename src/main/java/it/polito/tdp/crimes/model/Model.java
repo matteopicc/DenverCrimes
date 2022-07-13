@@ -86,6 +86,35 @@ public class Model {
 		}	
 	}
 	
+	public List<String>getReati(){
+		return dao.reati();
+	}
 	
+	public List<Integer>getMesi(){
+		return dao.mesi();
+	}
+	
+	public Integer nVertici(){
+		return this.grafo.vertexSet().size();
+	}
+	
+	public Integer nArchi(){
+		return this.grafo.edgeSet().size();
+	}
+	public List<Adiacenza>getArchi(){
+		List<Adiacenza> result = new ArrayList<>();
+		for(DefaultWeightedEdge e: this.grafo.edgeSet()) {
+				result.add(new Adiacenza(this.grafo.getEdgeSource(e), this.grafo.getEdgeTarget(e),(int)this.grafo.getEdgeWeight(e)));
+		}
+		return result;
+	}
+	
+	public boolean grafoCreato() {
+		if(this.grafo == null) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 	
 }
